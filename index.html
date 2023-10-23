@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>IESEG Bank - Gestion d'argent pour les étudiants</title>
+<link rel="stylesheet" type="text/css" href="stylez.css">
+</head>
+
+<body>
+
+<header>
+  <h1>IESEG Bank</h1>
+</header>
+
+<main>
+
+  <p>Gérez votre argent facilement en tant qu'étudiant à l'IESEG avec notre application conviviale.</p>
+
+  <h2>Votre solde actuel</h2>
+  
+  <div id="balance"></div>
+  
+  <div id="operations">
+    <h3>Opérations</h3>
+    
+    <input id="amount" type="number">
+    <button id="add">Ajouter</button>
+    <button id="withdraw">Retirer</button>
+    
+  </div>
+
+  <h3>Dernières transactions</h3>
+  
+  <ul id="transactions"></ul>
+
+  <button onclick="window.location.href='https://www.google.fr/maps/place/I%C3%89SEG+School+of+Management+-+Promenade+de+l\'Arche/@48.893394,2.2299167,17z/data=!3m1!4b1!4m6!3m5!1s0x47e664fdd2ca8f6d:0xcd57dd63c0ec743b!8m2!3d48.8933905!4d2.2324916!16s%2Fg%2F11gbnhfhb4?entry=ttu'">
+    Localiser l'emplacement de la banque
+  </button>
+
+  <h3>Avis d'utilisateurs</h3>
+  <div class="user-review">
+    <p><strong>John Doe :</strong> "IESEG Bank a rendu la gestion de mon budget étudiant si simple et efficace. Je le recommande vivement à tous les étudiants de l'IESEG."</p>
+  </div>
+  <div class="user-review">
+    <p><strong>Jane Smith :</strong> "Grâce à IESEG Bank, j'ai pu économiser et mieux gérer mes finances pendant mes années d'études. C'est vraiment une excellente banque pour les étudiants."</p>
+  </div>
+  <div class="user-review">
+    <p><strong>Robert Johnson :</strong> "J'utilise IESEG Bank depuis deux ans maintenant, et je suis très satisfait de leurs services. Leurs outils de suivi des dépenses sont particulièrement utiles."</p>
+  </div>
+  <div class="user-review">
+    <p><strong>Alice Williams :</strong> "IESEG Bank offre une excellente assistance clientèle. Chaque fois que j'ai eu des questions, leur équipe a été très réactive et serviable."</p>
+  </div>
+  <div class="user-review">
+    <p><strong>Michael Brown :</strong> "La facilité d'utilisation de l'application IESEG Bank a vraiment simplifié la gestion de mes finances pendant mes études. Je le recommande à tous les étudiants."</p>
+  </div>
+  <div class="user-review">
+    <p><strong>Sophia Miller :</strong> "IESEG Bank propose des offres spéciales fantastiques pour les étudiants, ce qui a vraiment aidé à économiser de l'argent pendant mes années d'université."</p>
+  </div>
+
+</main>
+
+<footer>
+  IESEG Bank - Tous droits réservés &copy; 2023
+</footer>
+
+<script>
+let balance = 2500;
+
+const transactions = [];
+
+function displayBalance(balance) {
+  document.getElementById('balance').innerText = balance + "€";
+}
+
+function displayTransactions(transactions) {
+  const transactionsList = document.getElementById('transactions');
+  transactionsList.innerHTML = '';
+  transactions.forEach(transaction => {
+    const listItem = document.createElement('li');
+    listItem.innerText = transaction;
+    transactionsList.appendChild(listItem);
+  });
+}
+
+const addButton = document.getElementById('add');
+addButton.onclick = function() {
+  const amount = parseInt(document.getElementById('amount').value);
+  if (!isNaN(amount)) {
+    balance += amount;
+    transactions.push("Ajout de " + amount + "€");
+    displayBalance(balance);
+    displayTransactions(transactions);
+  } else {
+    alert("Veuillez saisir un montant valide.");
+  }
+}
+
+const withdrawButton = document.getElementById('withdraw');
+withdrawButton.onclick = function() {
+  const amount = parseInt(document.getElementById('amount').value);
+  if (!isNaN(amount)) {
+    if (amount > balance) {
+      alert("Fonds insuffisants");
+    } else {
+      balance -= amount;
+      transactions.push("Retrait de " + amount + "€");
+      displayBalance(balance);
+      displayTransactions(transactions);
+    }
+  } else {
+    alert("Veuillez saisir un montant valide.");
+  }
+}
+
+displayBalance(balance);
+displayTransactions(transactions);
+</script>
+
+</body>
+</html>
